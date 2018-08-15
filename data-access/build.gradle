@@ -1,0 +1,28 @@
+repositories {
+    maven { url "https://repository.jboss.org/nexus/content/repositories/releases" }
+}
+
+jar {
+    baseName = 'data-access'
+    version = 'qride-get-cars-in-location'
+}
+
+test {
+    // To make sure each of your JUnit tests run as a separate JVM.
+    // This avoids two JUnit tests using the same database setup.
+    forkEvery = 1
+}
+
+dependencies {
+    compile project(':data-types')
+
+    compile("com.h2database:h2:1.4.196")
+    compile("org.springframework:spring-jdbc:5.0.1.RELEASE")
+    compile("javax.persistence:javax.persistence-api:2.2")
+    compile("org.hibernate:hibernate-core:5.2.10.Final")
+    compile("org.hibernate:hibernate-entitymanager:5.2.3.Final")
+    compile("org.springframework:spring-context:5.0.2.RELEASE");
+
+    testCompile("junit:junit:4.12")
+    testCompile("javax.xml:jaxb-api:2.1")
+}

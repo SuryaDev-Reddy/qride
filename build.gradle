@@ -1,0 +1,68 @@
+// Refer to the build.gradle file in data-types, data-access & rest-service directories.
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'checkstyle'
+    apply plugin: 'findbugs'
+    apply plugin: 'pmd'
+    apply plugin: "jacoco"
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    checkstyle {
+        toolVersion '7.8.1'
+        configFile file("${rootProject.projectDir}/__CRIO__/checkstyle.xml")
+    }
+
+    findbugs {
+        sourceSets = [sourceSets.main]
+    }
+
+    tasks.withType(FindBugs) {
+        reports {
+            xml.enabled = false
+            html.enabled = true
+        }
+    }
+
+    jacoco {
+        toolVersion = "0.7.1.201405082137"
+        reportsDir = file("$buildDir/customJacocoReportDir")
+    }
+
+    test {
+        jacoco {
+            append = true
+        }
+        reports {
+            junitXml.enabled = true
+            html.enabled = true
+        }
+    }
+
+
+    jacocoTestReport {
+        reports {
+            xml.enabled false
+            csv.enabled false
+        }
+    }
+
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                limit {
+                    minimum = 0.2
+                }
+            }
+        }
+    }
+
+    // to run coverage verification during the build (and fail when appropriate)
+    check.dependsOn jacocoTestCoverageVerification
+}
