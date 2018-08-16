@@ -1,0 +1,34 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.8.RELEASE")
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'rest-service'
+    version = 'qride-schedule-trip'
+}
+
+dependencies {
+    // TIP: Gradle supports multiple representations for adding dependencies.
+    // Following is one of the ways.
+    // Add additional dependencies if any here.
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-actuator:1.5.8.RELEASE")
+    compile project(':data-types')
+    compile project(':data-access')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('com.jayway.jsonpath:json-path')
+}
+
+bootRun {
+    // TIP: Uncomment the next line, if you want to connect to the debugger.
+    // jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+}

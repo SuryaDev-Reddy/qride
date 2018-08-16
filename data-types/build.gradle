@@ -1,0 +1,20 @@
+jar {
+    baseName = 'data-types'
+    version = 'qride-schedule-trip'
+}
+
+dependencies {
+    compile(
+            "com.fasterxml.jackson.core:jackson-core:2.9.2",
+            "com.fasterxml.jackson.core:jackson-annotations:2.9.2",
+            "com.fasterxml.jackson.core:jackson-databind:2.9.2",
+            "javax.validation:validation-api:1.1.0.Final",
+            "javax.persistence:javax.persistence-api:2.2",
+            "org.apache.commons:commons-lang3:3.0"
+    )
+
+    testCompile("junit:junit:4.12")
+    testCompile("org.skyscreamer:jsonassert:1.5.0")
+    // TIP: Gradle supports multiple representations for the above line. Following is another way:
+    // testCompile group: 'junit', name: 'junit', version: '4.12'
+}
