@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="carsinlocation.CarsInLocationHandlerImplTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-08-18T08:12:16" hostname="u1criodo" time="0.061">
+  <properties/>
+  <testcase name="getCarsInLocationEmptyResponse" classname="carsinlocation.CarsInLocationHandlerImplTest" time="0.029"/>
+  <testcase name="getCarsInLocationRegularCase" classname="carsinlocation.CarsInLocationHandlerImplTest" time="0.032"/>
+  <system-out><![CDATA[CarsInLocationHandlerImplTest:getCarsInLocationEmptyResponse You need to make changes to the following code to test your class
+CarsInLocationHandlerImplTest:getCarsInLocationRegularCase You need to make changes to the following code to test your class
+{"carStatuses":[{"carStatus":{"geoLocation":{"latitude":50.0,"longitude":100.0},"carAvailability":"CAR_AVAILABLE"}},{"carStatus":{"geoLocation":{"latitude":51.0,"longitude":101.0},"carAvailability":"CAR_AVAILABLE"}},{"carStatus":{"geoLocation":{"latitude":52.0,"longitude":102.0},"carAvailability":"CAR_AVAILABLE"}},{"carStatus":{"geoLocation":{"latitude":53.0,"longitude":103.0},"carAvailability":"CAR_AVAILABLE"}},{"carStatus":{"geoLocation":{"latitude":54.0,"longitude":104.0},"carAvailability":"CAR_AVAILABLE"}}]}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

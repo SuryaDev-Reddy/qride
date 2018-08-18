@@ -1,5 +1,7 @@
 package qrideserver;
 
+import static org.hamcrest.Matchers.anyOf;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -9,12 +11,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import carsinlocation.CarsInLocationHandlerImpl;
 import globals.GlobalConstants;
 import interfaces.ReadDataHandler;
+import org.hamcrest.Matchers;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.internal.matchers.Matches;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -63,7 +68,32 @@ public class CarsInLocationControllerTests {
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.carStatuses").isArray())
-        .andExpect(jsonPath("$.carStatuses", hasSize(22)))
-        .andExpect(jsonPath("$.carStatuses[0].carStatus.geoLocation.latitude").value(12.898976951279089));
+        .andExpect(jsonPath("$.carStatuses", hasSize(19)))
+        .andExpect(jsonPath("$.carStatuses[0].carStatus.geoLocation.latitude")
+            .value(12.898976951279089));
   }
+
+  //@Test
+  public void availabilityCase() throws Exception {
+    String requestBody = "{\"geoLocation\": {\"latitude\": 12.908486, \"longitude\": 77.536386}}";
+
+    this.mockMvc
+        .perform(
+            get("/qride/v1/cars_in_location")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody))
+        .andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.carStatuses").isArray())
+        .andExpect(jsonPath("$.carStatuses", hasSize(19)))
+        .andExpect(jsonPath("$.carStatuses[0].carStatus.geoLocation.latitude")
+            .value(12.898976951279089))
+        .andExpect(jsonPath("$.carStatuses[?(@.carStatus)].carStatus.carAvailability")
+            .value(Matchers.everyItem(
+                Matchers.isOneOf("CAR_ON_TRIP_CLOSE_TO_COMPLETION","CAR_AVAILABLE"))
+            ))
+    ;
+  }
+
+
 }

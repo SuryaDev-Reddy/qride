@@ -1,9 +1,13 @@
 package carsinlocation;
 
 import car.CarStatus;
+
 import interfaces.CarsInLocationHandler;
 import interfaces.ReadDataHandler;
+
+import java.util.ArrayList;
 import java.util.List;
+
 import read.ReadDataHandlerImpl;
 
 public class CarsInLocationHandlerImpl implements CarsInLocationHandler {
@@ -15,7 +19,7 @@ public class CarsInLocationHandlerImpl implements CarsInLocationHandler {
   }
 
   @Override
-  public CarsInLocationResponse getCarsInLocation(CarsInLocationRequest cars_in_location_request) {
+  public CarsInLocationResponse getCarsInLocation(CarsInLocationRequest carsInLocationRequest) {
     /*
      * Input:
      *   CarsInLocationRequest - User's current location.
@@ -32,10 +36,14 @@ public class CarsInLocationHandlerImpl implements CarsInLocationHandler {
     // Useful Link #1: http://www.oracle.com/us/technologies/java/assertions-139853.html
     // Useful Link #2: http://web.mit.edu/6.005/www/fa15/classes/08-avoiding-debugging/
     // You might also want to check if valid lat/long are passed in.
-    assert (cars_in_location_request != null);
+    assert (carsInLocationRequest != null);
 
     List<CarStatus> carStatusList =
-        readDataHandler.getCarsInLocation(cars_in_location_request.getGeoLocation());
+        readDataHandler.getCarsInLocation(carsInLocationRequest.getGeoLocation());
+
+    if (carStatusList == null) {
+      carStatusList = new ArrayList<CarStatus>();
+    }
 
     CarsInLocationResponse carsInLocationResponse = new CarsInLocationResponse();
     carsInLocationResponse.setCarStatuses(carStatusList);

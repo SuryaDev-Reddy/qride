@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="read.ReadDataHandlerImplTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2018-08-18T07:21:47" hostname="u1criodo" time="0.418">
+  <properties/>
+  <testcase name="getCarsForAvailabilityCase" classname="read.ReadDataHandlerImplTest" time="0.281"/>
+  <testcase name="getCarsInLocationNormalCase" classname="read.ReadDataHandlerImplTest" time="0.012"/>
+  <testcase name="getCarsInLocationEmptyCase" classname="read.ReadDataHandlerImplTest" time="0.051"/>
+  <testcase name="getCarsWithinRadiusCase" classname="read.ReadDataHandlerImplTest" time="0.071"/>
+  <system-out><![CDATA[In init - will be run only once
+Initialize Tables
+]]></system-out>
+  <system-err><![CDATA[Aug 18, 2018 7:21:40 AM org.hibernate.jpa.internal.util.LogHelper logPersistenceUnitInformation
+INFO: HHH000204: Processing PersistenceUnitInfo [
+	name: qrideDatabaseEmbedded
+	...]
+Aug 18, 2018 7:21:40 AM org.hibernate.Version logVersion
+INFO: HHH000412: Hibernate Core {5.2.10.Final}
+Aug 18, 2018 7:21:40 AM org.hibernate.cfg.Environment <clinit>
+INFO: HHH000206: hibernate.properties not found
+Aug 18, 2018 7:21:40 AM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+INFO: HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+Aug 18, 2018 7:21:41 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+WARN: HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+Aug 18, 2018 7:21:41 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001005: using driver [null] at URL [jdbc:h2:mem:qrideEmbeddedDB]
+Aug 18, 2018 7:21:41 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001001: Connection properties: {user=sa}
+Aug 18, 2018 7:21:41 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl buildCreator
+INFO: HHH10001003: Autocommit mode: false
+Aug 18, 2018 7:21:41 AM org.hibernate.engine.jdbc.connections.internal.PooledConnections <init>
+INFO: HHH000115: Hibernate connection pool size: 20 (min=1)
+Aug 18, 2018 7:21:42 AM org.hibernate.dialect.Dialect <init>
+INFO: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Aug 18, 2018 7:21:44 AM org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl getIsolatedConnection
+INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@5a05c378] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+Aug 18, 2018 7:21:47 AM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl stop
+INFO: HHH10001008: Cleaning up connection pool [jdbc:h2:mem:qrideEmbeddedDB]
+]]></system-err>
+</testsuite>

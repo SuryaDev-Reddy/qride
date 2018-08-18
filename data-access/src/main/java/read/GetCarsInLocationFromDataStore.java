@@ -34,24 +34,21 @@ public class GetCarsInLocationFromDataStore {
   // Use the Haversine formula shown in GlobalConstants.HAVER_SINE_FORMULA to calculate the distance
   // between two lat/longs. There are definitely more accurate ways to calculate distance,
   // but make sure your submission code uses this formula.
-  private List<CarStatus> getCarsInLocationFromDb(GeoLocation geo_location) {
+  private List<CarStatus> getCarsInLocationFromDb(GeoLocation geoLocation) {
     List<CarStatusTable> carStatusTableList;
     List<CarStatus> status = null;
 
     try {
-      Query native_query = em.createNativeQuery("SELECT * FROM CarStatusTable WHERE ("
+      Query nativeQuery = em.createNativeQuery("SELECT * FROM CarStatusTable WHERE ("
           + GlobalConstants.HAVER_SINE_FORMULA + "<=" + GlobalConstants.SEARCH_RADIUS
           + ") AND ( carAvailability <= :carAvailability )", CarStatusTable.class);
 
-      native_query.setParameter("latPoint", geo_location.getLatitude());
-      native_query.setParameter("longPoint", geo_location.getLongitude());
-      native_query.setParameter("carAvailability", 2);
+      nativeQuery.setParameter("latPoint", geoLocation.getLatitude());
+      nativeQuery.setParameter("longPoint", geoLocation.getLongitude());
+      nativeQuery.setParameter("carAvailability", 1);
 
-      carStatusTableList = native_query.getResultList();
-      if (carStatusTableList.size() != 0) {
-        // Initialize the array as we have got some cars back from SQL.
-        status = new ArrayList<>();
-      }
+      carStatusTableList = nativeQuery.getResultList();
+      status = new ArrayList<>();
     } catch (IllegalArgumentException e) {
       e.printStackTrace();
       return status;

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="car.CarStatusTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-08-18T07:22:07" hostname="u1criodo" time="0.894">
+  <properties/>
+  <testcase name="testJsonGeneration" classname="car.CarStatusTest" time="0.894"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
