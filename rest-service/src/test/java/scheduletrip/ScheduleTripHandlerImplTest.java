@@ -80,6 +80,7 @@ public class ScheduleTripHandlerImplTest {
     System.out.println(responseJsonString);
   }
 
+
   public ScheduleTripTransactionResult generateTripInfo(ScheduleTripTransactionInput scheduleTripTransactionInput) {
 
     ScheduleTripTransactionResult scheduleTripTransactionResult = new ScheduleTripTransactionResult();

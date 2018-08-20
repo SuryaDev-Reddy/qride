@@ -2,6 +2,7 @@ package qrideserver;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -68,7 +69,7 @@ public class ScheduleTripControllerTest {
 // }
   @Test
   public void isEqualSourceDestination() throws Exception {
-    String requestBody = "{\"carType: \"CAR_TYPE_HATCHBACK\", \"tripPrice: 129.00, \"sourceLocation: { \"latitude\": 12.908486, \"longitude\": 77.536386 }, "
+    String requestBody = "{\"carType\": \"CAR_TYPE_HATCHBACK\", \"tripPrice\": 129.00, \"sourceLocation\": { \"latitude\": 12.908486, \"longitude\": 77.536386 }, "
         + "\"destinationLocation\": { \"latitude\": 12.908486, \"longitude\": 77.536386 } } ";
     this.mockMvc
         .perform(
@@ -81,8 +82,9 @@ public class ScheduleTripControllerTest {
 
   @Test
   public void checkOutput1() throws Exception {
-    String requestBody = "{\"carType: \"CAR_TYPE_HATCHBACK\", \"tripPrice: 129.00, \"sourceLocation: { \"latitude\": 12.908486, \"longitude\": 77.536386 }, "
+    String requestBody = "{\"carType\": \"CAR_TYPE_HATCHBACK\", \"tripPrice\": 129.00, \"sourceLocation\": { \"latitude\": 12.908486, \"longitude\": 77.536386 }, "
         + "\"destinationLocation\": { \"latitude\": 13.808486, \"longitude\": 77.038396 } } ";
+    System.out.println("SURYA_TESTING" + requestBody);
 
 
     this.mockMvc
@@ -91,7 +93,7 @@ public class ScheduleTripControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody))
         .andDo(print())
-        .andExpect(status().isOk())
+        .andExpect(status().isAccepted())
         .andExpect(jsonPath("$.trip").exists())
         .andExpect(jsonPath("$.scheduleTripStatus").value("SUCCESSFULLY_BOOKED"))
         .andExpect(jsonPath("$.trip.tripStatus").value("TRIP_STATUS_SCHEDULED"));
