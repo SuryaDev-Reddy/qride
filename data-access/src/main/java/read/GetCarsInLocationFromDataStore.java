@@ -1,12 +1,15 @@
 package read;
 
+import car.Car.CarType;
 import car.CarStatus;
+import car.CarStatus.CarAvailability;
 import globals.GlobalConstants;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import location.GeoLocation;
+import location.GeoUtils;
 import tables.CarStatusTable;
 
 // This class contains methods to get available cars from datastore which can be either cache or db.
@@ -22,6 +25,10 @@ public class GetCarsInLocationFromDataStore {
   public List<CarStatus> getCarsInLocation(GeoLocation geoLocation) {
     // Connect to SQL server and read the table.
     return getCarsInLocationFromDb(geoLocation);
+  }
+
+  public List<CarStatus> getCarsInLocationOfCarType(GeoLocation geoLocation, CarType carType) {
+    return getCarsInLocationOfCarTypeFromDB(geoLocation,carType);
   }
 
   // Input:
@@ -41,11 +48,11 @@ public class GetCarsInLocationFromDataStore {
     try {
       Query nativeQuery = em.createNativeQuery("SELECT * FROM CarStatusTable WHERE ("
           + GlobalConstants.HAVER_SINE_FORMULA + "<=" + GlobalConstants.SEARCH_RADIUS
-          + ") AND ( carAvailability <= :carAvailability )", CarStatusTable.class);
+          + ") AND ( carAvailability = " + CarAvailability.CAR_AVAILABLE + " )" + "OR ( carAvailability = "
+          + CarAvailability.CAR_ON_TRIP_CLOSE_TO_COMPLETION + ")", CarStatusTable.class);
 
       nativeQuery.setParameter("latPoint", geoLocation.getLatitude());
       nativeQuery.setParameter("longPoint", geoLocation.getLongitude());
-      nativeQuery.setParameter("carAvailability", 1);
 
       carStatusTableList = nativeQuery.getResultList();
       status = new ArrayList<>();
@@ -62,4 +69,36 @@ public class GetCarsInLocationFromDataStore {
 
     return status;
   }
+
+  private List<CarStatus> getCarsInLocationOfCarTypeFromDB(GeoLocation geoLocation, CarType carType) {
+    List<CarStatusTable> carStatusTableList;
+    List<CarStatus> status = new ArrayList<>();
+
+    try {
+      Query nativeQuery = em.createNativeQuery("SELECT * FROM CarStatusTable WHERE ("
+              + GlobalConstants.HAVER_SINE_FORMULA + "<=" + GlobalConstants.SEARCH_RADIUS
+              + ") AND ( carAvailability = " + CarAvailability.CAR_AVAILABLE.ordinal() + " )" + "OR ( carAvailability = "
+              + CarAvailability.CAR_ON_TRIP_CLOSE_TO_COMPLETION.ordinal() + ")" + "AND (carType = :carType )"
+              + "ORDER BY " + GlobalConstants.HAVER_SINE_FORMULA,
+          CarStatusTable.class);
+
+      nativeQuery.setParameter("latPoint", geoLocation.getLatitude());
+      nativeQuery.setParameter("longPoint", geoLocation.getLongitude());
+      nativeQuery.setParameter("carType", carType);
+
+      carStatusTableList = nativeQuery.getResultList();
+
+    } catch (IllegalArgumentException e) {
+      e.printStackTrace();
+      return status;
+    } finally {
+      em.close();
+    }
+
+    for (CarStatusTable carStatusTable : carStatusTableList) {
+      status.add(FormatConverters.convertCarStatusTableIntoCarStatus(carStatusTable));
+    }
+    return status;
+  }
+
 }

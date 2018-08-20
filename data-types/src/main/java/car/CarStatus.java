@@ -1,8 +1,8 @@
 package car;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import location.GeoLocation;
-
 
 // This class when serialized produces the following JSON format.
 // {
@@ -16,6 +16,7 @@ import location.GeoLocation;
 public class CarStatus {
   private GeoLocation geoLocation;
   private CarAvailability carAvailability;
+  @JsonIgnore private String carId;
 
   public GeoLocation getGeoLocation() {
     return geoLocation;
@@ -28,6 +29,9 @@ public class CarStatus {
   @Override
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
+    if (getCarId() != null) {
+      stringBuilder.append(getCarId()).append(" ");
+    }
     if (getGeoLocation() != null) {
       stringBuilder.append(getGeoLocation()).append(" ");
     }
@@ -45,10 +49,19 @@ public class CarStatus {
     this.carAvailability = carAvailability;
   }
 
+  public String getCarId() {
+    return carId;
+  }
+
+  public void setCarId(String carId) {
+    this.carId = carId;
+  }
+
   public enum CarAvailability {
-    CAR_AVAILABLE,
-    CAR_ON_TRIP_CLOSE_TO_COMPLETION,
-    CAR_ON_TRIP,
+    UNKNOWN,
     CAR_OFF_DUTY,
+    CAR_AVAILABLE,
+    CAR_ON_TRIP,
+    CAR_ON_TRIP_CLOSE_TO_COMPLETION
   }
 }

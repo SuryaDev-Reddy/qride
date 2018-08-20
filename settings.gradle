@@ -15,7 +15,7 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'qride-get-cars-in-location'
+rootProject.name = 'qride-schedule-trip'
 
 include 'data-types'
 include 'data-access'

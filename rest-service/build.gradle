@@ -12,7 +12,7 @@ apply plugin: 'org.springframework.boot'
 
 jar {
     baseName = 'rest-service'
-    version = 'qride-get-cars-in-location'
+    version = 'qride-schedule-trip'
 }
 
 dependencies {

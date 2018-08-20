@@ -1,13 +1,10 @@
 package carsinlocation;
 
 import car.CarStatus;
-
 import interfaces.CarsInLocationHandler;
 import interfaces.ReadDataHandler;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import read.ReadDataHandlerImpl;
 
 public class CarsInLocationHandlerImpl implements CarsInLocationHandler {

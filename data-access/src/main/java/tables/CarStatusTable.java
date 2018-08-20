@@ -2,19 +2,22 @@ package tables;
 
 import car.Car;
 import car.CarStatus;
-import java.io.Serializable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.Version;
 import location.GeoLocation;
 
 // Details of CarStatusTable.
 @Entity
-public class CarStatusTable implements Serializable {
+public class CarStatusTable {
   @Id private String carId;
 
+  @Version
+  private int version;
+  
   @Enumerated(EnumType.ORDINAL)
   private Car.CarType carType;
 

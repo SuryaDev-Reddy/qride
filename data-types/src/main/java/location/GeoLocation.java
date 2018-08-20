@@ -17,6 +17,13 @@ public class GeoLocation implements Serializable {
   @NotNull private Double latitude;
   @NotNull private Double longitude;
 
+  public GeoLocation() {}
+
+  public GeoLocation(Double latitude, Double longitude) {
+    this.latitude = latitude;
+    this.longitude = longitude;
+  }
+
   @Override
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
@@ -27,6 +34,23 @@ public class GeoLocation implements Serializable {
       stringBuilder.append(getLongitude());
     }
     return stringBuilder.toString();
+  }
+
+  public boolean equals(Object obj) {
+    if (obj == null || obj.getClass() != getClass()) {
+      return false;
+    }
+    GeoLocation geoLocationB = (GeoLocation) obj;
+    if (getLatitude().equals(geoLocationB.getLatitude())
+        && getLongitude().equals(geoLocationB.getLongitude())) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public int hashCode() {
+    return super.hashCode();
   }
 
   @JsonIgnore

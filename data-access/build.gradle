@@ -4,7 +4,7 @@ repositories {
 
 jar {
     baseName = 'data-access'
-    version = 'qride-get-cars-in-location'
+    version = 'qride-schedule-trip'
 }
 
 test {
@@ -17,6 +17,7 @@ dependencies {
     compile project(':data-types')
 
     compile("com.h2database:h2:1.4.196")
+    compile('mysql:mysql-connector-java:6.0.6')
     compile("org.springframework:spring-jdbc:5.0.1.RELEASE")
     compile("javax.persistence:javax.persistence-api:2.2")
     compile("org.hibernate:hibernate-core:5.2.10.Final")

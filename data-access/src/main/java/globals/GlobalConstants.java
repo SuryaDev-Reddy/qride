@@ -13,13 +13,23 @@ public class GlobalConstants {
   // You can find its definition in persistence.xml file.
   public static final String PERSISTENCE_UNIT_NAME = "qrideDatabaseEmbedded";
 
+  // TIP: Use the following persistence unit name to connect to a MySQL server.
+  // Note that you should have a MySQL server installed & started separately unlike the embedded
+  // H2 database.
+  // Also you may have to update the <ip:port>, username & password in the persistence.xml file.
+  // public static final String PERSISTENCE_UNIT_NAME = "qrideMySQLDB";
+
   // Name of the test persistence unit.
   public static final String PERSISTENCE_TEST_UNIT_NAME = "qrideDatabaseEmbedded";
 
   // Radius within which available cars are searched.
   public static final double SEARCH_RADIUS = 3.0;
 
+  // Fixed seeds for random number generation to make sure unit tests work fine.
   public static final int CAR_STATUS_TABLE_INIT_SEED = 777;
+  public static final int CAR_DETAILS_TABLE_INIT_SEED = 778;
+  public static final int DRIVER_DETAILS_TABLE_INIT_SEED = 779;
+  public static final int TRIP_TABLE_INIT_SEED = 780;
 
   // EntityManagerFactory that will be used. You need to set this to the test, dev/production
   // databases appropriately.
